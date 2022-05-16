@@ -31,8 +31,9 @@ func UserRouter() http.Handler {
 			context.JSON(
 				http.StatusServiceUnavailable,
 				gin.H{
-					"error": res["error"],
-					"token": "",
+					"error":  res["error"],
+					"token":  "",
+					"openid": "",
 				},
 			)
 		} else {
@@ -40,8 +41,9 @@ func UserRouter() http.Handler {
 			context.JSON(
 				http.StatusOK,
 				gin.H{
-					"error": res["error"],
-					"token": res["token"],
+					"error":  res["error"],
+					"token":  res["token"],
+					"openid": res["openid"],
 				},
 			)
 		}
@@ -84,6 +86,23 @@ func UserRouter() http.Handler {
 				)
 			}
 		})
+
+		v1.GET("/getUserName", func(context *gin.Context) {
+			openid := context.Query("openid")
+			response, err := http.Get("http://localhost:8000/user/userName/" + openid)
+			if err != nil || response.StatusCode != http.StatusOK {
+				context.Status(http.StatusServiceUnavailable)
+			} else {
+				res, _ := parseResponse(response)
+				context.JSON(
+					http.StatusOK,
+					gin.H{
+						"msg":      "ok",
+						"userName": res["userName"],
+					},
+				)
+			}
+		})
 	}
 
 	v2 := e.Group("/api/team")
@@ -96,10 +115,12 @@ func UserRouter() http.Handler {
 			if err != nil || response.StatusCode != http.StatusOK {
 				context.Status(http.StatusServiceUnavailable)
 			} else {
+				res, _ := parseResponse(response)
 				context.JSON(
 					http.StatusOK,
 					gin.H{
-						"msg": "ok",
+						"msg":    "ok",
+						"teamID": res["teamID"],
 					},
 				)
 			}

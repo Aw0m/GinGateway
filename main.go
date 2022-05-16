@@ -1,7 +1,6 @@
 package main
 
 import (
-	"database/sql"
 	"golang.org/x/sync/errgroup"
 	"log"
 	"net/http"
@@ -12,8 +11,7 @@ import (
 )
 
 var (
-	g     errgroup.Group
-	db, _ = sql.Open("mysql", "root:lx2001812xx@(localhost:3306)/wxproject_dev")
+	g errgroup.Group
 )
 
 func main() {

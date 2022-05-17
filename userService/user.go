@@ -143,6 +143,36 @@ func UserRouter() http.Handler {
 				)
 			}
 		})
+
+		v2.GET("/selectTeam", func(context *gin.Context) {
+			teamID := context.Query("teamID")
+			url := "http://localhost:8000/team/selectTeam/" + teamID
+			response, err := http.Get(url)
+			if err != nil || response.StatusCode != http.StatusOK {
+				context.Status(response.StatusCode)
+			} else {
+				reader := response.Body
+				contentLength := response.ContentLength
+				contentType := response.Header.Get("Content-Type")
+				extraHeaders := map[string]string{}
+				context.DataFromReader(http.StatusOK, contentLength, contentType, reader, extraHeaders)
+			}
+		})
+
+		v2.GET("/selectMembers", func(context *gin.Context) {
+			teamID := context.Query("teamID")
+			url := "http://localhost:8000/team/selectMembers/" + teamID
+			response, err := http.Get(url)
+			if err != nil || response.StatusCode != http.StatusOK {
+				context.Status(response.StatusCode)
+			} else {
+				reader := response.Body
+				contentLength := response.ContentLength
+				contentType := response.Header.Get("Content-Type")
+				extraHeaders := map[string]string{}
+				context.DataFromReader(http.StatusOK, contentLength, contentType, reader, extraHeaders)
+			}
+		})
 	}
 	return e
 }

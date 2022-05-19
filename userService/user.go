@@ -173,6 +173,22 @@ func UserRouter() http.Handler {
 				context.DataFromReader(http.StatusOK, contentLength, contentType, reader, extraHeaders)
 			}
 		})
+
+		v2.GET("/selectTeamCode", func(context *gin.Context) {
+			teamID := context.Query("teamID")
+			openid := middleware.GetOpenid(context.GetHeader("Authorization"))
+			url := "http://localhost:8000/team/selectTeamCode/" + teamID + "?userID=" + openid
+			response, err := http.Get(url)
+			if err != nil || response.StatusCode != http.StatusOK {
+				context.Status(response.StatusCode)
+			} else {
+				reader := response.Body
+				contentLength := response.ContentLength
+				contentType := response.Header.Get("Content-Type")
+				extraHeaders := map[string]string{}
+				context.DataFromReader(http.StatusOK, contentLength, contentType, reader, extraHeaders)
+			}
+		})
 	}
 	return e
 }

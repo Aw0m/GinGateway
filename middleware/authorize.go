@@ -45,10 +45,13 @@ func Authorize() gin.HandlerFunc {
 }
 
 func GetOpenid(tokenString string) string {
-	token, _ := jwt.ParseWithClaims(tokenString, &MyCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
+	token, err := jwt.ParseWithClaims(tokenString, &MyCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return TokenSalt, nil
 	})
-	claims, _ := token.Claims.(*MyCustomClaims)
+	if err != nil {
+		return ""
+	}
+	claims := token.Claims.(*MyCustomClaims)
 	openid := claims.UserId
 	return openid
 }

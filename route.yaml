@@ -1,0 +1,10 @@
+/api/login: /user/login
+/api/user/updateUserName: /user/userName
+/api/user/getUserName: /user/userName
+/api/team/createTeam: /team/createTeam
+/api/team/updateTeamName: /team/updateTeam
+/api/team/selectTeam: /team/selectTeam
+/api/team/selectMembers: /team/selectMembers
+/api/team/selectTeamCode: /team/selectTeamCode
+/api/team/updateTeamCode: /team/updateTeamCode
+/api/team/joinTeam: /team/joinTeam

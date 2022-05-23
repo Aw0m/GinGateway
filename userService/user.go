@@ -1,9 +1,7 @@
 package userService
 
 import (
-	"encoding/json"
 	"github.com/gin-gonic/gin"
-	"io/ioutil"
 	"net/http"
 	"wxprojectApiGateway/middleware"
 )
@@ -28,14 +26,4 @@ func UserRouter() http.Handler {
 	e.Use(middleware.Authorize())
 	e.Use(middleware.RouteForward("user"))
 	return e
-}
-
-func parseResponse(response *http.Response) (map[string]interface{}, error) {
-	var result map[string]interface{}
-	body, err := ioutil.ReadAll(response.Body)
-	if err == nil {
-		err = json.Unmarshal(body, &result)
-	}
-
-	return result, err
 }

@@ -13,7 +13,7 @@ type User struct {
 
 func UserRouter() http.Handler {
 	e := gin.New()
-	e.Use(gin.Recovery())
+	e.Use(gin.Recovery(), gin.Logger())
 	e.POST("/api/login", func(context *gin.Context) {
 		err := middleware.ForwardHandler(context.Writer, context.Request, "user")
 		if err.Error() == "not exist" {

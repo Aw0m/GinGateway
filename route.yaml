@@ -8,3 +8,4 @@
 /api/team/selectTeamCode: /team/selectTeamCode
 /api/team/updateTeamCode: /team/updateTeamCode
 /api/team/joinTeam: /team/joinTeam
+/api/team/selectAllTeams: /team/selectAllTeams

@@ -3,6 +3,7 @@ package workService
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"wxprojectApiGateway/middleware"
 )
 
 func WorkRouter() http.Handler {
@@ -18,6 +19,7 @@ func WorkRouter() http.Handler {
 			},
 		)
 	})
-
+	e.Use(middleware.Authorize())
+	e.Use(middleware.RouteForward("work"))
 	return e
 }

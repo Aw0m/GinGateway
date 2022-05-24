@@ -19,7 +19,7 @@ type MyCustomClaims struct {
 func Authorize() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		tokenString := c.GetHeader("Authorization")
-		log.Println("Authorization Token: ", tokenString)
+		//log.Println("Authorization Token: ", tokenString)
 
 		token, err := jwt.ParseWithClaims(tokenString, &MyCustomClaims{}, func(token *jwt.Token) (interface{}, error) {
 			return TokenSalt, nil
@@ -31,7 +31,7 @@ func Authorize() gin.HandlerFunc {
 			return
 		}
 		if claims, ok := token.Claims.(*MyCustomClaims); ok && token.Valid {
-			fmt.Printf("Username: %v, ExpiresAt %v", claims.UserName, claims.StandardClaims.ExpiresAt)
+			fmt.Printf("Username: %v, ExpiresAt %v   ", claims.UserName, claims.StandardClaims.ExpiresAt)
 			// 验证通过，会继续访问下一个中间件
 			c.Next()
 		} else {

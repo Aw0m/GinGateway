@@ -31,8 +31,8 @@ func init() {
 	// TODO HostMap需要改成从服务中心进行读取
 	HostMap = map[string]string{
 		"user": "localhost:8000",
-		"note": "localhost:8001",
-		"work": "localhost:8002",
+		"work": "localhost:8001",
+		"note": "localhost:8002",
 	}
 }
 

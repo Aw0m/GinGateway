@@ -9,3 +9,4 @@
 /api/team/updateTeamCode: /team/updateTeamCode
 /api/team/joinTeam: /team/joinTeam
 /api/team/selectAllTeams: /team/selectAllTeams
+/api/work/createReport: /work/createReport

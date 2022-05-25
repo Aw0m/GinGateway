@@ -10,3 +10,5 @@
 /api/team/joinTeam: /team/joinTeam
 /api/team/selectAllTeams: /team/selectAllTeams
 /api/work/createReport: /work/createReport
+/api/work/getReport: /work/getReport
+/api/work/getReportInfos: /work/getReportInfos

@@ -24,6 +24,7 @@ func UserRouter() http.Handler {
 	})
 
 	e.Use(middleware.Authorize())
+	e.Use(middleware.TokenBucketLimiter())
 	e.Use(middleware.RouteForward("user"))
 	return e
 }

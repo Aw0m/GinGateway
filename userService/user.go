@@ -16,10 +16,12 @@ func UserRouter() http.Handler {
 	e.Use(gin.Recovery(), gin.Logger())
 	e.POST("/api/login", func(context *gin.Context) {
 		err := middleware.ForwardHandler(context.Writer, context.Request, "user")
-		if err.Error() == "not exist" {
-			context.Status(http.StatusNotFound)
-		} else if err != nil {
-			context.Status(http.StatusServiceUnavailable)
+		if err != nil {
+			if err.Error() == "not exist" {
+				context.Status(http.StatusNotFound)
+			} else {
+				context.Status(http.StatusServiceUnavailable)
+			}
 		}
 	})
 

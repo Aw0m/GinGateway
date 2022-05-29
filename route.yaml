@@ -9,6 +9,7 @@
 /api/team/updateTeamCode: /team/updateTeamCode
 /api/team/joinTeam: /team/joinTeam
 /api/team/selectAllTeams: /team/selectAllTeams
+/api/team/addAdmin: /team/addAdmin
 /api/work/createReport: /work/createReport
 /api/work/getReport: /work/getReport
 /api/work/getReportInfos: /work/getReportInfos

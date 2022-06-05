@@ -1,6 +1,7 @@
 package discovery
 
 import (
+	"fmt"
 	"github.com/go-redis/redis/v8"
 	"log"
 	"math/rand"
@@ -28,6 +29,7 @@ func GetService(serviceName string) (string, bool) {
 			continue
 		}
 		// 存在则直接返回url
+		fmt.Printf("最终URL为： %s;  ", url)
 		return url, true
 	}
 }

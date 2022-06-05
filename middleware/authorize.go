@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
-	"log"
 	"net/http"
 )
 
@@ -26,19 +25,19 @@ func Authorize() gin.HandlerFunc {
 		})
 		if err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{"message": "访问未授权"})
-			log.Println("没有访问token，拦截", err)
+			fmt.Println("\n没有访问token，拦截", err)
 			c.Abort()
 			return
 		}
 		if claims, ok := token.Claims.(*MyCustomClaims); ok && token.Valid {
-			fmt.Printf("Username: %v, ExpiresAt %v   ", claims.UserName, claims.StandardClaims.ExpiresAt)
+			fmt.Printf("\nUsername: %v, ExpiresAt %v;   ", claims.UserName, claims.StandardClaims.ExpiresAt)
 			// 验证通过，会继续访问下一个中间件
 			c.Next()
 		} else {
-			fmt.Println("出现错误：", err)
+			fmt.Println("\n出现错误：", err)
 			// 验证不通过，不再调用后续的函数处理
 			c.JSON(http.StatusUnauthorized, gin.H{"message": "访问未授权"})
-			log.Println("token错误，拦截")
+			fmt.Println("\ntoken错误，拦截")
 			c.Abort()
 		}
 	}

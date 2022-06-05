@@ -1,8 +1,8 @@
 package middleware
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
-	"log"
 	"net/http"
 	"time"
 )
@@ -13,10 +13,10 @@ func TokenBucketLimiter() gin.HandlerFunc {
 		if ok := b.GetToken(); !ok {
 			context.Status(http.StatusServiceUnavailable)
 			context.Abort()
-			log.Println("请求被拒绝")
+			fmt.Println("限流中间件：请求被拒绝")
 		} else {
 			context.Next()
-			log.Println("请求成功")
+			fmt.Println("限流中间件：请求成功")
 		}
 	}
 }

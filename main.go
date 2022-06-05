@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 	"wxprojectApiGateway/noteService"
+	"wxprojectApiGateway/service/discovery"
 	"wxprojectApiGateway/userService"
 	"wxprojectApiGateway/workService"
 )
@@ -13,6 +14,11 @@ import (
 var (
 	g errgroup.Group
 )
+
+func init() {
+	// 初始化服务注册和服务发现中心的配置
+	discovery.InitDiscovery("service/discovery/config.yaml")
+}
 
 func main() {
 	server01 := &http.Server{

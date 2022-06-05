@@ -9,11 +9,11 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"wxprojectApiGateway/service/discovery"
 )
 
 var (
 	RouteMap map[string]string
-	HostMap  map[string]string
 )
 
 func init() {
@@ -26,13 +26,6 @@ func init() {
 	if err = yaml.Unmarshal(yamlFile, &RouteMap); err != nil {
 		// error handling
 		log.Fatalln(err)
-	}
-
-	// TODO HostMap需要改成从服务中心进行读取
-	HostMap = map[string]string{
-		"user": "localhost:8000",
-		"work": "localhost:8001",
-		"note": "localhost:8002",
 	}
 }
 
@@ -55,7 +48,7 @@ func RouteForward(serviceName string) gin.HandlerFunc {
 }
 
 func ForwardHandler(writer http.ResponseWriter, request *http.Request, serviceName string) error {
-	host, exist := HostMap[serviceName]
+	host, exist := discovery.GetService(serviceName)
 	if !exist {
 		return errors.New("not exist")
 	}

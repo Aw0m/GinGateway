@@ -1,9 +1,9 @@
 package noteService
 
 import (
+	"GinGateway/middleware"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"wxprojectApiGateway/middleware"
 )
 
 func NoteRouter() http.Handler {

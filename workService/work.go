@@ -1,10 +1,10 @@
 package workService
 
 import (
+	"GinGateway/middleware"
+	"GinGateway/service/discovery"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"wxprojectApiGateway/middleware"
-	"wxprojectApiGateway/service/discovery"
 )
 
 func WorkRouter() http.Handler {

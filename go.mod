@@ -1,4 +1,4 @@
-module wxprojectApiGateway
+module GinGateway
 
 go 1.18
 

@@ -1,14 +1,14 @@
 package main
 
 import (
+	"GinGateway/noteService"
+	"GinGateway/service/discovery"
+	"GinGateway/userService"
+	"GinGateway/workService"
 	"golang.org/x/sync/errgroup"
 	"log"
 	"net/http"
 	"time"
-	"wxprojectApiGateway/noteService"
-	"wxprojectApiGateway/service/discovery"
-	"wxprojectApiGateway/userService"
-	"wxprojectApiGateway/workService"
 )
 
 var (
@@ -17,7 +17,7 @@ var (
 
 func init() {
 	// 初始化服务注册和服务发现中心的配置
-	discovery.InitDiscovery("service/discovery/config.yaml")
+	discovery.InitDiscovery("config.yaml")
 }
 
 func main() {

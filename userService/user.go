@@ -1,9 +1,9 @@
 package userService
 
 import (
+	"GinGateway/middleware"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"wxprojectApiGateway/middleware"
 )
 
 type User struct {

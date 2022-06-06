@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"GinGateway/service/discovery"
 	"errors"
 	"github.com/gin-gonic/gin"
 	"gopkg.in/yaml.v2"
@@ -10,7 +11,6 @@ import (
 	"net/http/httputil"
 	"net/url"
 	"strings"
-	"wxprojectApiGateway/service/discovery"
 )
 
 var (

@@ -19,7 +19,6 @@ func NoteRouter() http.Handler {
 			},
 		)
 	})
-	e.Use(middleware.TokenBucketLimiter())
 	e.Use(middleware.Authorize())
 	e.Use(middleware.TokenBucketLimiter())
 	e.Use(middleware.RouteForward("work"))

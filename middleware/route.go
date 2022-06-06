@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+	"strings"
 	"wxprojectApiGateway/service/discovery"
 )
 
@@ -58,8 +59,14 @@ func ForwardHandler(writer http.ResponseWriter, request *http.Request, serviceNa
 		return errors.New("not exist")
 	}
 
-	rawURL := "http://" + host + path + "?" + request.URL.RawQuery
-	u, err := url.Parse(rawURL)
+	var rawURL strings.Builder
+	rawURL.WriteString("http://")
+	rawURL.WriteString(host)
+	rawURL.WriteString(path)
+	rawURL.WriteString("?")
+	rawURL.WriteString(request.URL.RawQuery)
+
+	u, err := url.Parse(rawURL.String())
 	if nil != err {
 		log.Println(err)
 		return err

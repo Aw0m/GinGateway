@@ -1,6 +1,9 @@
 package registry
 
-import "time"
+import (
+	"strings"
+	"time"
+)
 
 func Register(serviceName, ip, host string, timeLen time.Duration) {
 	go func() {
@@ -15,5 +18,9 @@ func Register(serviceName, ip, host string, timeLen time.Duration) {
 }
 
 func getLocalUrl(ip, host string) string {
-	return ip + ":" + host
+	var LocalUrl strings.Builder
+	LocalUrl.WriteString(ip)
+	LocalUrl.WriteString(":")
+	LocalUrl.WriteString(host)
+	return LocalUrl.String()
 }

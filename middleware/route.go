@@ -56,7 +56,7 @@ func ForwardHandler(writer http.ResponseWriter, request *http.Request, serviceNa
 
 	path, exist := RouteMap[request.URL.Path]
 	if !exist {
-		return errors.New("not exist")
+		path = request.URL.Path
 	}
 
 	var rawURL strings.Builder

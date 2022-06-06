@@ -4,7 +4,7 @@
 
 ## 目录
 
-- [wxprojectApiGateway](#wxprojectApiGateway)
+- [GoZGateway](#GoZGateway)
     - [目录](#目录)
     - [日志](#日志)
         - [6.3 记录](#6.3-记录)

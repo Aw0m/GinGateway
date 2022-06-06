@@ -8,9 +8,8 @@ import (
 
 func NoteRouter() http.Handler {
 	e := gin.New()
-	e.Use(gin.Recovery())
+	e.Use(gin.Recovery(), gin.Logger())
 	//e.Use(middleware.Authorize())
-	e.Use(middleware.TokenBucketLimiter())
 	e.GET("/", func(c *gin.Context) {
 		c.JSON(
 			http.StatusOK,
@@ -20,5 +19,9 @@ func NoteRouter() http.Handler {
 			},
 		)
 	})
+	e.Use(middleware.TokenBucketLimiter())
+	e.Use(middleware.Authorize())
+	e.Use(middleware.TokenBucketLimiter())
+	e.Use(middleware.RouteForward("work"))
 	return e
 }

@@ -1,5 +1,6 @@
-# wxprojectApiGateway
-微信小程序共琢 后端api网关部分
+# GoZGateway
+
+**共琢** 使用Gin框架实现的API网关系统
 
 ## 目录
 

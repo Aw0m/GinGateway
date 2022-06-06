@@ -1,4 +1,4 @@
-# GoZGateway
+# GinGateway
 
 **共琢** 使用Gin框架实现的API网关系统
 

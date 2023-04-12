@@ -1,11 +1,16 @@
-package middleware
+package auth
 
 import (
 	"fmt"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt"
-	"net/http"
 )
+
+/*
+	该中间件通过JWT实现用户鉴权，用户可以自定义鉴权，或者不适用在中间件，不在API网关层鉴权
+*/
 
 var TokenSalt = []byte("dev123")
 

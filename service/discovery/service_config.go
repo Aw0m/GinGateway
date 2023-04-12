@@ -3,10 +3,11 @@ package discovery
 import (
 	"context"
 	"fmt"
-	"github.com/go-redis/redis/v8"
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"sync"
+
+	"github.com/go-redis/redis/v8"
+	"gopkg.in/yaml.v2"
 )
 
 type Config struct {

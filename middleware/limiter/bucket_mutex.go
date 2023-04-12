@@ -1,11 +1,11 @@
-package middleware
+package limiter
 
 import (
 	"sync"
 	"time"
 )
 
-type TokenBucket struct {
+type TokenBucketMutex struct {
 	//token []int
 	limit  int
 	num    int
@@ -14,11 +14,11 @@ type TokenBucket struct {
 }
 
 var (
-	bucket     *TokenBucket
+	bucket     *TokenBucketMutex
 	singleLock sync.Mutex
 )
 
-func GetBucket(limit, num int, ticker *time.Ticker) *TokenBucket {
+func GetBucketMutex(limit, num int, ticker *time.Ticker) *TokenBucketMutex {
 	if bucket != nil {
 		return bucket
 	}
@@ -28,7 +28,7 @@ func GetBucket(limit, num int, ticker *time.Ticker) *TokenBucket {
 		if limit < num {
 			limit = num
 		}
-		bucket = &TokenBucket{
+		bucket = &TokenBucketMutex{
 			limit:  limit,
 			num:    num,
 			ticker: ticker,
@@ -48,7 +48,7 @@ func GetBucket(limit, num int, ticker *time.Ticker) *TokenBucket {
 	return bucket
 }
 
-func (bucket *TokenBucket) GetToken() bool {
+func (bucket *TokenBucketMutex) GetToken() bool {
 	if bucket.num > 0 {
 		bucket.mu.Lock()
 		defer bucket.mu.Unlock()
@@ -60,14 +60,13 @@ func (bucket *TokenBucket) GetToken() bool {
 	return false
 }
 
-func (bucket *TokenBucket) addToken() bool {
+func (bucket *TokenBucketMutex) addToken() {
 	if bucket.num < bucket.limit {
 		bucket.mu.Lock()
 		defer bucket.mu.Unlock()
 		if bucket.num < bucket.limit {
 			bucket.num++
-			return true
+			return
 		}
 	}
-	return false
 }

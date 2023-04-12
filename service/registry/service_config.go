@@ -3,10 +3,11 @@ package registry
 import (
 	"context"
 	"fmt"
-	"github.com/go-redis/redis/v8"
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"sync"
+
+	"github.com/go-redis/redis/v8"
+	"gopkg.in/yaml.v2"
 )
 
 type Config struct {
@@ -26,6 +27,8 @@ var (
 	once   sync.Once
 )
 
+// InitRegistry 服务注册需要先初始化Redis
+// 各个微服务在服务注册时需要调用该函数，才能在API网关发现该服务
 func InitRegistry(yamlPath string) {
 	once.Do(func() {
 		initConfig(yamlPath)

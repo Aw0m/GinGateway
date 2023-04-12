@@ -2,10 +2,11 @@ package discovery
 
 import (
 	"fmt"
-	"github.com/go-redis/redis/v8"
 	"log"
 	"math/rand"
 	"time"
+
+	"github.com/go-redis/redis/v8"
 )
 
 func GetService(serviceName string) (string, bool) {
